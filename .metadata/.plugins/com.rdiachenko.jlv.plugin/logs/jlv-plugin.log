@@ -1,0 +1,4 @@
+[2023-12-29 10:24:56,004] [INFO] [ResourceManager] [Framework stop - Equinox Container: 14049608-297a-4a7f-9abe-1515a1094902]: Font registry disposed
+[2023-12-29 10:24:56,011] [INFO] [ResourceManager] [Framework stop - Equinox Container: 14049608-297a-4a7f-9abe-1515a1094902]: Color registry disposed
+[2023-12-29 10:24:56,011] [INFO] [ResourceManager] [Framework stop - Equinox Container: 14049608-297a-4a7f-9abe-1515a1094902]: Image registry disposed
+[2023-12-29 10:25:52,457] [INFO] [SourceProvider] [main]: serverStarted source variable initialized to true

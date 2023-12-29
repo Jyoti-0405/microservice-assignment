@@ -1,0 +1,68 @@
+package com.nagarro.accountmanagement.controllers;
+
+import java.math.BigDecimal;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.nagarro.accountmanagement.model.Account;
+import com.nagarro.accountmanagement.service.AccountService;
+
+
+//import model.Account;
+//import service.AccountService;
+
+@RestController
+@RequestMapping("/accounts/{id}")
+public class AccountController {
+	
+	@Autowired
+    private AccountService accountService;
+
+    @PostMapping
+    public ResponseEntity<?> createAccount(@PathVariable Long id, BigDecimal amount){
+        System.out.println("account service data " + this.accountService);
+        this.accountService.createAccount(id);
+
+
+        return ResponseEntity.created(null).body("Account Created Successfully");
+    }
+
+    @PutMapping("/add-money")
+    public ResponseEntity<?> addMoney(@PathVariable Long id, @RequestParam BigDecimal amount){
+        Account account = this.accountService.addMoney(id, amount);
+        return ResponseEntity.ok(account);
+    }
+
+    @PutMapping("/withdrawn-money")
+    public ResponseEntity<Account> withdrawMoney(@PathVariable Long id, @RequestParam BigDecimal amount){
+        Account account = this.accountService.withdrawMoney(id,amount);
+        return ResponseEntity.ok(account);
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getAccountDetails(@PathVariable Long id) {
+        // Retrieve and return account details including customer details
+    	System.out.println("Welcome back");
+    	Account account = this.accountService.getAccountDetails(id);
+        return ResponseEntity.ok(account);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<?> deleteAccount(@PathVariable Long id) {
+        // Delete the account
+        if(this.accountService.deleteAccount(id)) {
+            return ResponseEntity.ok("Account deleted successfully");
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+}
